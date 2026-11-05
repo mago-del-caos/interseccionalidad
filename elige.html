@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector Manual de Interseccionalidad</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="genero.png" alt="Banner Rueda de la Interseccionalidad" class="banner">
+    </header>
+    
+    <main class="container">
+        <h2>Selector Manual</h2>
+        <p>Inicia el giro y detenlo manualmente en el elemento que quieras analizar.</p>
+        
+        <div class="ruleta-wrapper">
+            <div class="flecha">▼</div>
+            <canvas id="ruleta" width="400" height="400"></canvas>
+        </div>
+
+        <div class="controles">
+            <button id="btn-control" class="btn">Iniciar Giro</button>
+            <p id="resultado" style="margin-top: 15px; font-weight: bold; color: #9c27b0; font-size: 1.2em; min-height: 25px;"></p>
+            <a href="index.html" class="btn btn-regresar">Regresar al Menú</a>
+        </div>
+    </main>
+
+    <script>
+        const canvas = document.getElementById("ruleta");
+        const ctx = canvas.getContext("2d");
+        const btnControl = document.getElementById("btn-control");
+        const textoResultado = document.getElementById("resultado");
+
+        const opciones = [
+            "Estatus Socio-económico",
+            "País de Origen",
+            "Creencias Religiosas",
+            "Identidad de Género",
+            "Orientación Sexual",
+            "Edad",
+            "Grupo Étnico",
+            "Discapacidad"
+        ];
+
+        const colores = [
+            "#ffb3ba", "#e0bbe4", "#957dad", "#aee5f5", 
+            "#b5e8b0", "#fff2aa", "#ffd59e", "#ff9a9e"
+        ];
+
+        let anguloActual = 0;
+        let girando = false;
+        let idAnimacion;
+
+        function dibujarRuleta() {
+            const radio = canvas.width / 2;
+            const arco = (2 * Math.PI) / opciones.length;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < opciones.length; i++) {
+                const anguloInicial = anguloActual + i * arco;
+                const anguloFinal = anguloInicial + arco;
+
+                ctx.beginPath();
