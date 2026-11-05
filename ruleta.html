@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruleta de la Interseccionalidad</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Librería para el efecto de confeti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <header>
+        <img src="genero.png" alt="Banner Rueda de la Interseccionalidad" class="banner">
+    </header>
+    
+    <main class="container">
+        <h2>Ruleta de la Interseccionalidad</h2>
+        <p>Ajusta la fuerza y gira la ruleta para descubrir un elemento.</p>
+        
+        <div class="ruleta-wrapper">
+            <div class="flecha">▼</div>
+            <canvas id="ruleta" width="400" height="400"></canvas>
+        </div>
+
+        <div class="controles">
+            <label for="fuerza" style="font-weight: bold; color: #4a148c;">Fuerza de lanzamiento:</label>
+            <input type="range" id="fuerza" min="1" max="10" value="5">
+            <button id="btn-girar" class="btn">¡Girar Ruleta!</button>
+            <a href="index.html" class="btn btn-regresar">Regresar al Menú</a>
+        </div>
+    </main>
+
+    <script>
+        const canvas = document.getElementById("ruleta");
+        const ctx = canvas.getContext("2d");
+        const btnGirar = document.getElementById("btn-girar");
+        const inputFuerza = document.getElementById("fuerza");
+
+        // Elementos extraídos de la imagen de referencia
+        const opciones = [
+            "Estatus Socio-económico",
+            "País de Origen",
+            "Creencias Religiosas",
+            "Identidad de Género",
+            "Orientación Sexual",
+            "Edad",
+            "Grupo Étnico",
+            "Discapacidad"
+        ];
+
+        const colores = [
+            "#ffb3ba", // Rosa
+            "#e0bbe4", // Lila
+            "#957dad", // Morado
+            "#aee5f5", // Azul claro
+            "#b5e8b0", // Verde
+            "#fff2aa", // Amarillo
+            "#ffd59e", // Naranja
+            "#ff9a9e"  // Rojo claro
+        ];
+
+        let anguloActual = 0;
+        let girando = false;
+
+        function dibujarRuleta() {
+            const radio = canvas.width / 2;
+            const arco = (2 * Math.PI) / opciones.length;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < opciones.length; i++) {
+                const anguloInicial = anguloActual + i * arco;
+                const anguloFinal = anguloInicial + arco;
+
+                // Dibujar sección
+                ctx.beginPath();
+                ctx.fillStyle = colores[i];
+                ctx.moveTo(radio, radio);
+                ctx.arc(radio, radio, radio, anguloInicial, anguloFinal);
+                ctx.fill();
+                ctx.stroke();
+
+                // Dibujar texto
+                ctx.save();
+                ctx.translate(radio, radio);
+                ctx.rotate(anguloInicial + arco / 2);
+                ctx.textAlign = "right";
+                ctx.fillStyle = "#333";
+                ctx.font = "bold 14px Arial";
+                ctx.fillText(opciones[i], radio - 20, 5);
+                ctx.restore();
+            }
+        }
+
+        function girar() {
+            if (girando) return;
+            girando = true;
+
+            const fuerza = parseInt(inputFuerza.value);
+            // Rotación base + aleatoriedad + multiplicador por la fuerza
+            const gradosGiro = (Math.random() * 360) + (360 * fuerza) + 1080; 
+            const tiempoGiro = 3000 + (fuerza * 200); // Entre 3 y 5 segundos
+
+            let inicio = null;
+
+            function animarGiro(tiempoActual) {
+                if (!inicio) inicio = tiempoActual;
+                const progreso = tiempoActual - inicio;
+
+                // Función de aceleración (Ease Out)
+                const porcentajeEfectivo = 1 - Math.pow(1 - (progreso / tiempoGiro), 3);
+                
+                anguloActual = (gradosGiro * porcentajeEfectivo * Math.PI) / 180;
+                dibujarRuleta();
+
+                if (progreso < tiempoGiro) {
+                    requestAnimationFrame(animarGiro);
+                } else {
+                    girando = false;
+                    determinarGanador();
+                }
+            }
+            requestAnimationFrame(animarGiro);
+        }
+
+        function determinarGanador() {
+            // Ajustar el ángulo para que coincida con la flecha superior (270 grados / -90 grados)
+            const arcoPlano = (2 * Math.PI) / opciones.length;
+            const anguloNormalizado = anguloActual % (2 * Math.PI);
+            
+            // Calculamos qué índice quedó en la parte superior (aprox 3/2 PI)
+            let indiceGanador = Math.floor(((1.5 * Math.PI) - anguloNormalizado + (2 * Math.PI)) % (2 * Math.PI) / arcoPlano);
+            
+            const ganador = opciones[indiceGanador];
+
+            // Lanzar confeti
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            // Mostrar la pregunta con el elemento ganador
+            setTimeout(() => {
+                alert(`¿Qué desigualdad se puede presentar por ${ganador.toUpperCase()}?`);
+            }, 500);
+        }
+
+        btnGirar.addEventListener("click", girar);
+        
+        // Dibujo inicial
+        dibujarRuleta();
+    </script>
+</body>
+</html>
