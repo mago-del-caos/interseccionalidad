@@ -1,0 +1,106 @@
+/* Reset básico para asegurar consistencia en todos los navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fondo lila general y tipografía */
+body {
+    background-color: #E6E6FA; /* Lila suave / Lavender */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Estilo del banner solicitado (genero.png) */
+.banner {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    margin-bottom: 20px;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Contenedor principal de las páginas */
+.container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+/* Títulos y textos */
+h1, h2, h3 {
+    color: #4a148c; /* Morado oscuro para contrastar con el fondo lila */
+    margin-bottom: 15px;
+}
+
+p {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    line-height: 1.5;
+}
+
+/* Menú principal y botones */
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #9c27b0; /* Botones morados */
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #7b1fa2;
+    transform: scale(1.02);
+}
+
+.btn-regresar {
+    background-color: #607d8b;
+    margin-top: 20px;
+}
+
+/* --- ESTILOS PARA LA RULETA --- */
+.ruleta-wrapper {
+    position: relative;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* La flecha indicadora de la ruleta */
+.flecha {
+    font-size: 3em;
+    margin-bottom: -15px;
+    z-index: 10;
+    color: #d32f2f;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+canvas {
+    border-radius: 50%;
+    box-shadow: 0
