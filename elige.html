@@ -2,34 +2,36 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selector Manual | Rueda de la Interseccionalidad 🌌</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Selector Manual | Rueda de la Interseccionalidad 🌸</title>
     
-    <!-- Tipografía ultra moderna -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <!-- Tipografía suave y redondeada -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome para íconos -->
+    <!-- Íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Enlace limpio al CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="animated-background">
-        <div class="glow-orb orb-1"></div>
-        <div class="glow-orb orb-2"></div>
-        <div class="glow-orb orb-3"></div>
+    <!-- Fondo Kawaii (Burbujas pastel) -->
+    <div class="kawaii-background">
+        <div class="bubble b-1"></div>
+        <div class="bubble b-2"></div>
+        <div class="bubble b-3"></div>
+        <div class="bubble b-4"></div>
     </div>
 
     <div class="app-container">
-        <header class="header floating">
+        <header class="header">
             <!-- Enlace limpio a la imagen -->
-            <img src="genero.png" alt="Banner Interseccionalidad" class="banner neon-border">
+            <img src="genero.png" alt="Banner Interseccionalidad" class="banner kawaii-shadow">
         </header>
         
-        <main class="main-content glass-panel-neon">
-            <h1 class="title glitch-effect" data-text="Selector Manual">Selector Manual</h1>
-            <p class="subtitle typing-effect">Inicia la rueda y detenla tú mismo frente a la flecha para elegir el tema a debatir.</p>
+        <main class="main-content kawaii-panel">
+            <h1 class="kawaii-title">Selector Manual</h1>
+            <p class="kawaii-subtitle">Inicia la rueda y detenla tú mismo frente a la flecha para elegir el tema.</p>
             
             <div class="ruleta-wrapper">
                 <div class="flecha"><i class="fa-solid fa-caret-down"></i></div>
@@ -39,10 +41,8 @@
             <div class="controles">
                 <button id="btn-control" class="btn"><i class="fa-solid fa-play"></i> Iniciar Giro</button>
                 
-                <!-- Aquí aparecerá el resultado con el estilo neón -->
                 <p id="resultado" class="resultado-texto"></p>
                 
-                <!-- Enlace limpio de regreso -->
                 <a href="index.html" class="btn btn-regresar"><i class="fa-solid fa-arrow-left"></i> Regresar al Menú</a>
             </div>
         </main>
