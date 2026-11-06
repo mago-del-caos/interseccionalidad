@@ -3,32 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memorama | Rueda de la Interseccionalidad</title>
-    <!-- Tipografía moderna -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Memorama | Rueda de la Interseccionalidad 🌌</title>
+    
+    <!-- Tipografía ultra moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS con control de versiones -->
+    <link rel="stylesheet" href="style.css?v=3.0">
 </head>
 <body>
+    <!-- Efectos de fondo (Orbes de luz animados) -->
+    <div class="animated-background">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+    </div>
+
     <div class="app-container">
-        <header class="header">
-            <img src="genero.png" alt="Banner Rueda de la Interseccionalidad" class="banner" onerror="this.src='https://via.placeholder.com/800x200/4a148c/ffffff?text=Banner+genero.png';">
+        <header class="header floating">
+            <img src="genero.png?v=3.0" alt="Banner Interseccionalidad" class="banner neon-border" onerror="this.src='https://via.placeholder.com/800x200/4a148c/ffffff?text=Banner+genero.png';">
         </header>
         
-        <main class="main-content glass-panel">
-            <h1 class="title">Memorama</h1>
-            <p class="subtitle">Encuentra el par correcto: une cada elemento de la rueda con su ejemplo real de desigualdad.</p>
+        <main class="main-content glass-panel-neon">
+            <h1 class="title glitch-effect" data-text="Memorama Interactivo">Memorama Interactivo</h1>
+            <p class="subtitle typing-effect">Encuentra el par correcto: une cada elemento de la rueda con su ejemplo real de desigualdad.</p>
             
             <div class="memorama-tablero" id="tablero">
                 <!-- Las cartas se generarán dinámicamente desde el JS -->
             </div>
 
             <div style="margin-top: 30px; text-align: center;">
-                <a href="index.html" class="btn btn-regresar">Regresar al Menú</a>
+                <a href="index.html?v=3.0" class="btn btn-regresar"><i class="fa-solid fa-arrow-left"></i> Regresar al Menú</a>
             </div>
         </main>
     </div>
 
-    <!-- Archivo JS unificado -->
-    <script src="main.js"></script>
+    <!-- Archivo JS unificado con control de versiones -->
+    <script src="main.js?v=3.0"></script>
 </body>
 </html>
