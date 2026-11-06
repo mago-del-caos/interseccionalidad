@@ -2,37 +2,42 @@
    VARIABLES Y RESET
 ========================================= */
 :root {
-    --fondo-profundo: #0f0518; 
-    --lila-neon: #d500f9;
-    --morado-brillante: #9c27b0;
-    --lila-claro: #e0bbe4;
-    --cristal: rgba(30, 10, 45, 0.6);
-    --borde-cristal: rgba(213, 0, 249, 0.3);
-    --texto-principal: #f3e5f5;
+    --fondo-kawaii: #fff5f8; /* Rosa muy pálido */
+    --texto-kawaii: #6b4c7a; /* Morado suave para buen contraste */
+    --panel-bg: rgba(255, 255, 255, 0.85);
+    --sombra-kawaii: 0 10px 30px rgba(205, 162, 233, 0.25);
+    
+    /* Paleta Pastel Kawaii */
+    --pastel-rosa: #ffb3ba;
+    --pastel-azul: #aee5f5;
+    --pastel-morado: #cda2e9;
+    --pastel-verde: #b5e8b0;
+    --pastel-amarillo: #fff2aa;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
 body {
-    background-color: var(--fondo-profundo);
-    color: var(--texto-principal);
+    background-color: var(--fondo-kawaii);
+    color: var(--texto-kawaii);
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    padding: 20px;
+    align-items: center; /* Centra verticalmente */
+    padding: clamp(10px, 3vw, 20px);
     overflow-x: hidden;
     position: relative;
 }
 
 /* =========================================
-   FONDOS ANIMADOS (ORBES)
+   FONDO ANIMADO (BURBUJAS PASTEL)
 ========================================= */
-.animated-background {
+.kawaii-background {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
     z-index: -1;
@@ -40,25 +45,25 @@ body {
     pointer-events: none;
 }
 
-.glow-orb {
+.bubble {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
     opacity: 0.5;
-    animation: float-orb 15s infinite alternate ease-in-out;
+    animation: float-bubble 12s infinite ease-in-out alternate;
 }
 
-.orb-1 { width: 300px; height: 300px; background: var(--lila-neon); top: 10%; left: 20%; }
-.orb-2 { width: 400px; height: 400px; background: var(--morado-brillante); bottom: 10%; right: 10%; animation-delay: -5s; }
-.orb-3 { width: 250px; height: 250px; background: #651fff; top: 40%; left: 60%; animation-delay: -10s; }
+.b-1 { width: 150px; height: 150px; background: var(--pastel-azul); bottom: -20px; left: 10%; }
+.b-2 { width: 250px; height: 250px; background: var(--pastel-rosa); top: -50px; right: -50px; animation-delay: -3s; }
+.b-3 { width: 100px; height: 100px; background: var(--pastel-amarillo); top: 40%; left: 85%; animation-delay: -6s; }
+.b-4 { width: 200px; height: 200px; background: var(--pastel-morado); bottom: 20%; left: -50px; animation-delay: -9s; }
 
-@keyframes float-orb {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(50px, 50px) scale(1.2); }
+@keyframes float-bubble {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-40px) scale(1.1); }
 }
 
 /* =========================================
-   CONTENEDORES Y GLASSMORPHISM NEÓN
+   CONTENEDOR Y PANEL (100% RESPONSIVO)
 ========================================= */
 .app-container {
     width: 100%;
@@ -66,275 +71,258 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 20px; /* Evita que el banner y el panel se peguen */
     z-index: 1;
 }
 
-.glass-panel-neon {
-    background: var(--cristal);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid var(--borde-cristal);
-    border-radius: 20px;
-    padding: 40px;
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.banner {
+    width: 100%;
+    max-width: 600px; /* Tamaño máximo en PC */
+    height: auto; /* Mantiene la proporción en móviles */
+    border-radius: 25px;
+    box-shadow: var(--sombra-kawaii);
+    object-fit: contain;
+}
+
+.kawaii-panel {
+    background: var(--panel-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 3px solid #fff;
+    border-radius: 35px;
+    /* El padding cambia: chico en celular, grande en PC */
+    padding: clamp(20px, 5vw, 40px); 
     width: 100%;
     text-align: center;
-    box-shadow: 0 0 30px rgba(213, 0, 249, 0.15), inset 0 0 20px rgba(213, 0, 249, 0.05);
+    box-shadow: var(--sombra-kawaii);
 }
 
 /* =========================================
-   HEADER Y BANNER
+   TEXTOS KAWAII
 ========================================= */
-.header.floating {
-    animation: floating 4s infinite ease-in-out;
-}
-
-.banner.neon-border {
-    width: 100%;
-    max-width: 700px;
-    height: auto;
-    border-radius: 15px;
-    border: 2px solid var(--lila-neon);
-    box-shadow: 0 0 20px var(--lila-neon), 0 0 40px var(--morado-brillante);
-    transition: all 0.3s;
-}
-
-.banner.neon-border:hover {
-    box-shadow: 0 0 30px var(--lila-neon), 0 0 60px var(--morado-brillante);
-    transform: scale(1.02);
-}
-
-@keyframes floating {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-/* =========================================
-   TIPOGRAFÍA Y EFECTOS
-========================================= */
-.title {
-    font-size: clamp(2rem, 5vw, 3rem);
+.kawaii-title {
+    /* El tamaño de letra se adapta automáticamente a la pantalla */
+    font-size: clamp(1.8rem, 4vw, 2.5rem); 
     font-weight: 900;
+    color: var(--pastel-morado);
+    text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(205, 162, 233, 0.4);
     margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    line-height: 1.2;
 }
 
-/* Efecto Glitch */
-.glitch-effect {
-    position: relative;
-    color: #fff;
-    text-shadow: 0 0 10px var(--lila-neon);
-}
-.glitch-effect::before, .glitch-effect::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    opacity: 0.8;
-}
-.glitch-effect::before {
-    left: 2px;
-    text-shadow: -2px 0 #00ffff;
-    animation: glitch-anim 2s infinite linear alternate-reverse;
-}
-.glitch-effect::after {
-    left: -2px;
-    text-shadow: -2px 0 #ff00ff;
-    animation: glitch-anim 3s infinite linear alternate-reverse;
-}
-
-@keyframes glitch-anim {
-    0% { clip-path: inset(20% 0 80% 0); }
-    20% { clip-path: inset(60% 0 10% 0); }
-    40% { clip-path: inset(40% 0 50% 0); }
-    60% { clip-path: inset(80% 0 5% 0); }
-    80% { clip-path: inset(10% 0 70% 0); }
-    100% { clip-path: inset(30% 0 20% 0); }
-}
-
-.subtitle {
-    color: var(--lila-claro);
-    font-size: 1.1rem;
-    margin-bottom: 40px;
-    text-shadow: 0 0 5px rgba(224, 187, 228, 0.5);
+.kawaii-subtitle {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: var(--texto-kawaii);
+    font-weight: 700;
+    margin-bottom: 30px;
 }
 
 /* =========================================
-   MENÚ PRINCIPAL (TARJETAS 3D)
+   MENÚ PRINCIPAL (GRID FLUIDO SIN CRUCES)
 ========================================= */
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    perspective: 1000px;
+    /* Magia responsive: si caben de a 240px, hace columnas; si no, baja a 1 sola columna en celular */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    width: 100%;
 }
 
 .menu-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    padding: 30px 20px;
+    background: #fff;
+    border-radius: 25px;
+    padding: 25px 15px;
     text-decoration: none;
-    color: var(--texto-principal);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s, border-color 0.4s;
+    color: var(--texto-kawaii);
+    border: 3px solid transparent;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
 .menu-card:hover {
-    transform: translateY(-10px) scale(1.03);
-    border-color: var(--lila-neon);
-    box-shadow: 0 15px 30px rgba(213, 0, 249, 0.3), inset 0 0 15px rgba(213, 0, 249, 0.2);
+    transform: translateY(-8px);
+    border-color: var(--pastel-morado);
+    box-shadow: var(--sombra-kawaii);
 }
 
-.card-icon {
-    font-size: 3.5rem;
-    color: var(--lila-neon);
-    filter: drop-shadow(0 0 10px var(--lila-neon));
-}
-
-.menu-card h2 { font-size: 1.3rem; font-weight: 800; letter-spacing: 1px; }
-.menu-card p { font-size: 0.95rem; color: #b39ddb; }
+.card-icon { font-size: 3rem; }
+.menu-card h2 { font-size: 1.2rem; font-weight: 900; }
+.menu-card p { font-size: 0.9rem; font-weight: 700; opacity: 0.8; }
 
 /* =========================================
    BOTONES E INPUTS
 ========================================= */
+.controles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    margin-top: 20px;
+}
+
 .btn {
-    background: linear-gradient(90deg, var(--morado-brillante), var(--lila-neon));
-    color: white;
+    background: var(--pastel-morado);
+    color: #fff;
     border: none;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    font-weight: 800;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 900;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
-    text-transform: uppercase;
-    box-shadow: 0 0 15px var(--lila-neon);
-    position: relative;
-    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(205, 162, 233, 0.5);
+    width: 100%;
+    max-width: 250px; /* En PC no se hace gigante */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
-.btn::after {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 50%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    transform: skewX(-20deg);
-    transition: 0.5s;
-}
-
-.btn:hover::after { left: 150%; }
 .btn:hover {
-    box-shadow: 0 0 30px var(--lila-neon), 0 0 10px #fff;
     transform: scale(1.05);
+    background: #b98cd6;
+    box-shadow: 0 8px 20px rgba(205, 162, 233, 0.6);
 }
 
 .btn-regresar {
-    background: transparent;
-    border: 2px solid var(--lila-claro);
-    box-shadow: none;
-    margin-top: 20px;
+    background: #fff;
+    color: var(--pastel-morado);
+    border: 3px solid var(--pastel-morado);
 }
 .btn-regresar:hover {
-    background: rgba(224, 187, 228, 0.1);
-    border-color: #fff;
-    box-shadow: 0 0 15px var(--lila-claro);
+    background: var(--pastel-morado);
+    color: #fff;
 }
 
 input[type="range"] {
     -webkit-appearance: none;
-    width: 100%; max-width: 300px; height: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 5px; outline: none;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+    width: 100%;
+    max-width: 300px;
+    height: 15px;
+    background: var(--pastel-azul);
+    border-radius: 10px;
+    outline: none;
 }
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 25px; height: 25px;
+    width: 30px; height: 30px;
     border-radius: 50%;
     background: #fff;
     cursor: pointer;
-    box-shadow: 0 0 15px var(--lila-neon), 0 0 5px var(--lila-neon);
-    border: 3px solid var(--lila-neon);
+    border: 4px solid var(--pastel-azul);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 /* =========================================
-   RULETA
+   RULETA RESPONSIVA
 ========================================= */
 .ruleta-wrapper {
     position: relative;
-    display: flex; flex-direction: column; align-items: center;
-    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    width: 100%;
 }
+
 .flecha {
-    position: absolute; top: -35px;
-    font-size: 3rem; color: #00e5ff;
+    position: absolute;
+    top: -20px;
+    font-size: 2.5rem;
+    color: var(--pastel-rosa);
     z-index: 10;
-    text-shadow: 0 0 15px #00e5ff, 0 0 30px #00e5ff;
-    animation: floating 2s infinite ease-in-out;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
 }
+
 canvas {
     background-color: #fff;
     border-radius: 50%;
-    box-shadow: 0 0 40px var(--lila-neon), 0 0 15px rgba(255, 255, 255, 0.5);
-    border: 5px solid var(--fondo-profundo);
-    max-width: 100%; height: auto;
+    box-shadow: var(--sombra-kawaii);
+    border: 8px solid #fff;
+    /* Canvas fluido: Nunca se desborda en celular */
+    width: 100%;
+    max-width: 350px; 
+    height: auto;
+    aspect-ratio: 1 / 1;
 }
+
 .resultado-texto {
-    font-size: 1.5rem; font-weight: 900; color: #fff;
-    text-shadow: 0 0 15px var(--lila-neon), 0 0 30px var(--lila-neon);
-    min-height: 40px; margin-top: 15px;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    font-weight: 900;
+    color: var(--pastel-morado);
+    min-height: 35px;
+    margin-top: 10px;
 }
 
 /* =========================================
-   MEMORAMA (CARTAS NEÓN 3D)
+   MEMORAMA KAWAII (CARTAS FLUIDAS)
 ========================================= */
 .memorama-tablero {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px; width: 100%;
+    /* En PC se ponen 4, en celular se ajustan a 2 o 3 según el ancho sin encimarse */
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 20px;
 }
+
 .carta {
-    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-    border: 1px solid rgba(213, 0, 249, 0.3);
-    height: 120px;
-    border-radius: 12px;
-    cursor: pointer; font-weight: 700; font-size: 0.95em;
-    display: flex; justify-content: center; align-items: center; text-align: center;
-    padding: 10px; color: transparent;
-    transition: transform 0.6s, box-shadow 0.3s;
-    transform-style: preserve-3d;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    background: #fff;
+    border: 3px solid var(--pastel-azul);
+    height: 100px; 
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    color: transparent; /* Oculto */
+    transition: transform 0.4s, background 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
+
 .carta:hover {
-    border-color: var(--lila-neon);
-    box-shadow: 0 0 15px rgba(213, 0, 249, 0.5);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(174, 229, 245, 0.5);
 }
+
 .carta.volteada {
-    background: #fff; color: var(--fondo-profundo);
-    transform: rotateY(180deg);
-    border: 3px solid var(--lila-neon);
-    box-shadow: 0 0 20px var(--lila-neon);
+    background: var(--fondo-kawaii);
+    color: var(--texto-kawaii);
+    border-color: var(--pastel-morado);
+    transform: scale(1.05);
 }
-.carta.volteada span { transform: rotateY(180deg); display: block; }
+
 .carta.encontrada {
-    background: #1de9b6; color: #004d40;
-    border: 3px solid #00bfa5;
-    box-shadow: 0 0 20px #1de9b6;
-    transform: rotateY(180deg) scale(0.95);
+    background: var(--pastel-verde);
+    color: #4a7544;
+    border-color: #92d68d;
+    transform: scale(0.95);
     cursor: default;
 }
-.carta.encontrada span { transform: rotateY(180deg); }
 
-@media (max-width: 650px) {
-    .memorama-tablero { grid-template-columns: repeat(2, 1fr); }
-    canvas { width: 300px; height: 300px; }
+/* Regla especial para iPhones y teléfonos muy estrechos */
+@media (max-width: 380px) {
+    .memorama-tablero {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .carta {
+        height: 120px; /* Un poco más de alto para leer textos largos en pantallas pequeñas */
+    }
 }
