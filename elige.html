@@ -3,38 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selector Manual | Rueda de la Interseccionalidad</title>
-    <!-- Tipografía moderna -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Selector Manual | Rueda de la Interseccionalidad 🌌</title>
+    
+    <!-- Tipografía ultra moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS con control de versiones -->
+    <link rel="stylesheet" href="style.css?v=3.0">
 </head>
 <body>
+    <!-- Efectos de fondo (Orbes de luz animados) -->
+    <div class="animated-background">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+    </div>
+
     <div class="app-container">
-        <header class="header">
-            <img src="genero.png" alt="Banner Rueda de la Interseccionalidad" class="banner" onerror="this.src='https://via.placeholder.com/800x200/4a148c/ffffff?text=Banner+genero.png';">
+        <header class="header floating">
+            <img src="genero.png?v=3.0" alt="Banner Interseccionalidad" class="banner neon-border" onerror="this.src='https://via.placeholder.com/800x200/4a148c/ffffff?text=Banner+genero.png';">
         </header>
         
-        <main class="main-content glass-panel">
-            <h1 class="title">Selector Manual</h1>
-            <p class="subtitle">Inicia la rueda y detenla tú mismo frente a la flecha para elegir el tema a debatir.</p>
+        <main class="main-content glass-panel-neon">
+            <h1 class="title glitch-effect" data-text="Selector Manual">Selector Manual</h1>
+            <p class="subtitle typing-effect">Inicia la rueda y detenla tú mismo frente a la flecha para elegir el tema a debatir.</p>
             
             <div class="ruleta-wrapper">
-                <div class="flecha">▼</div>
+                <div class="flecha"><i class="fa-solid fa-caret-down"></i></div>
                 <canvas id="ruleta" width="400" height="400"></canvas>
             </div>
 
             <div class="controles">
-                <button id="btn-control" class="btn">Iniciar Giro</button>
+                <button id="btn-control" class="btn"><i class="fa-solid fa-play"></i> Iniciar Giro</button>
                 
                 <!-- Aquí aparecerá el resultado con el estilo neón -->
                 <p id="resultado" class="resultado-texto"></p>
                 
-                <a href="index.html" class="btn btn-regresar">Regresar al Menú</a>
+                <a href="index.html?v=3.0" class="btn btn-regresar"><i class="fa-solid fa-arrow-left"></i> Regresar al Menú</a>
             </div>
         </main>
     </div>
 
-    <!-- Archivo JS unificado -->
-    <script src="main.js"></script>
+    <!-- Archivo JS unificado con control de versiones -->
+    <script src="main.js?v=3.0"></script>
 </body>
 </html>
