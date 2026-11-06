@@ -3,24 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rueda de la Interseccionalidad - Menú Principal</title>
+    <title>Rueda de la Interseccionalidad | Inicio</title>
+    <!-- Tipografía moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <!-- Banner solicitado en todas las páginas -->
-        <img src="genero.png" alt="Banner Rueda de la Interseccionalidad" class="banner">
-    </header>
-    
-    <main class="container">
-        <h1>Rueda de la Interseccionalidad</h1>
-        <p>Selecciona una dinámica para comenzar:</p>
+    <div class="app-container">
+        <header class="header">
+            <!-- Banner centralizado. He añadido un onerror por si la imagen tarda en cargar mientras desarrollas -->
+            <img src="genero.png" alt="Banner Rueda de la Interseccionalidad" class="banner" onerror="this.src='https://via.placeholder.com/800x200/4a148c/ffffff?text=Banner+genero.png';">
+        </header>
         
-        <nav class="menu">
-            <a href="ruleta.html" class="btn">1. Ruleta de la Interseccionalidad (Fuerza de lanzamiento)</a>
-            <a href="elige.html" class="btn">2. Selector Manual (Elige tu tema)</a>
-            <a href="memorama.html" class="btn">3. Memorama (Conceptos y Ejemplos)</a>
-        </nav>
-    </main>
+        <main class="main-content glass-panel">
+            <h1 class="title">Rueda de la Interseccionalidad</h1>
+            <p class="subtitle">Explora cómo las distintas realidades se cruzan. Selecciona una dinámica para comenzar:</p>
+            
+            <nav class="menu-grid">
+                <a href="ruleta.html" class="menu-card">
+                    <div class="card-icon">🎡</div>
+                    <h2>Ruleta de Azar</h2>
+                    <p>Ajusta la fuerza y gira para descubrir un elemento de desigualdad.</p>
+                </a>
+                
+                <a href="elige.html" class="menu-card">
+                    <div class="card-icon">🎯</div>
+                    <h2>Selector Manual</h2>
+                    <p>Inicia el giro y detenlo tú mismo exactamente donde decidas.</p>
+                </a>
+                
+                <a href="memorama.html" class="menu-card">
+                    <div class="card-icon">🧠</div>
+                    <h2>Memorama</h2>
+                    <p>Encuentra los pares entre los conceptos y sus ejemplos reales.</p>
+                </a>
+            </nav>
+        </main>
+    </div>
+
+    <!-- Archivo JS unificado -->
+    <script src="main.js"></script>
 </body>
 </html>
