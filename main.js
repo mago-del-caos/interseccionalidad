@@ -119,7 +119,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. LÓGICA: SELECTOR MANUAL (elige.html)
     // ==========================================
     const btnControl = document.getElementById("btn-control");
-    if (btnControl) {
+    if (btnControl && !document.getElementById("btn-girar")) { 
+        // Se asegura de no correr en ruleta.html
         const canvasManual = document.getElementById("ruleta");
         const ctxManual = canvasManual.getContext("2d");
         const textoResultado = document.getElementById("resultado");
