@@ -2,12 +2,12 @@
    VARIABLES Y RESET
 ========================================= */
 :root {
-    --lila-oscuro: #2a0845;
-    --lila-medio: #6441A5;
+    --fondo-profundo: #0f0518; /* Morado casi negro para que resalte el neón */
+    --lila-neon: #d500f9;
+    --morado-brillante: #9c27b0;
     --lila-claro: #e0bbe4;
-    --neon-morado: #d500f9;
-    --blanco-transparente: rgba(255, 255, 255, 0.1);
-    --borde-cristal: rgba(255, 255, 255, 0.2);
+    --cristal: rgba(30, 10, 45, 0.6);
+    --borde-cristal: rgba(213, 0, 249, 0.3);
     --texto-principal: #f3e5f5;
 }
 
@@ -19,15 +19,47 @@
 }
 
 body {
-    background: linear-gradient(135deg, var(--lila-oscuro) 0%, var(--lila-medio) 100%);
+    background-color: var(--fondo-profundo);
     color: var(--texto-principal);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     padding: 20px;
-    background-attachment: fixed;
+    overflow-x: hidden;
+    position: relative;
 }
 
+/* =========================================
+   FONDOS ANIMADOS (ORBES)
+========================================= */
+.animated-background {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    animation: float-orb 15s infinite alternate ease-in-out;
+}
+
+.orb-1 { width: 300px; height: 300px; background: var(--lila-neon); top: 10%; left: 20%; }
+.orb-2 { width: 400px; height: 400px; background: var(--morado-brillante); bottom: 10%; right: 10%; animation-delay: -5s; }
+.orb-3 { width: 250px; height: 250px; background: #651fff; top: 40%; left: 60%; animation-delay: -10s; }
+
+@keyframes float-orb {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 50px) scale(1.2); }
+}
+
+/* =========================================
+   CONTENEDORES Y GLASSMORPHISM NEÓN
+========================================= */
 .app-container {
     width: 100%;
     max-width: 900px;
@@ -35,130 +67,174 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    z-index: 1;
 }
 
-/* =========================================
-   HEADER Y BANNER
-========================================= */
-.header {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.banner {
-    width: 100%;
-    max-width: 700px;
-    height: auto;
-    border-radius: 15px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-    border: 1px solid var(--borde-cristal);
-    transition: transform 0.3s ease;
-}
-
-.banner:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px 0 rgba(213, 0, 249, 0.3);
-}
-
-/* =========================================
-   PANELES TIPO CRISTAL (GLASSMORPHISM)
-========================================= */
-.glass-panel {
-    background: var(--blanco-transparente);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+.glass-panel-neon {
+    background: var(--cristal);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border: 1px solid var(--borde-cristal);
     border-radius: 20px;
     padding: 40px;
     width: 100%;
     text-align: center;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-}
-
-.title {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    font-weight: 800;
-    margin-bottom: 10px;
-    background: linear-gradient(to right, #fff, var(--lila-claro));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0px 4px 15px rgba(213, 0, 249, 0.4);
-}
-
-.subtitle {
-    font-size: 1.1rem;
-    color: #ce93d8;
-    margin-bottom: 30px;
+    box-shadow: 0 0 30px rgba(213, 0, 249, 0.15), inset 0 0 20px rgba(213, 0, 249, 0.05);
 }
 
 /* =========================================
-   MENÚ PRINCIPAL (TARJETAS)
+   HEADER Y BANNER
+========================================= */
+.header.floating {
+    animation: floating 4s infinite ease-in-out;
+}
+
+.banner.neon-border {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    border-radius: 15px;
+    border: 2px solid var(--lila-neon);
+    box-shadow: 0 0 20px var(--lila-neon), 0 0 40px var(--morado-brillante);
+    transition: all 0.3s;
+}
+
+.banner.neon-border:hover {
+    box-shadow: 0 0 30px var(--lila-neon), 0 0 60px var(--morado-brillante);
+    transform: scale(1.02);
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* =========================================
+   TIPOGRAFÍA Y EFECTOS
+========================================= */
+.title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Efecto Glitch */
+.glitch-effect {
+    position: relative;
+    color: #fff;
+    text-shadow: 0 0 10px var(--lila-neon);
+}
+.glitch-effect::before, .glitch-effect::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    opacity: 0.8;
+}
+.glitch-effect::before {
+    left: 2px;
+    text-shadow: -2px 0 #00ffff;
+    animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+.glitch-effect::after {
+    left: -2px;
+    text-shadow: -2px 0 #ff00ff;
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip-path: inset(20% 0 80% 0); }
+    20% { clip-path: inset(60% 0 10% 0); }
+    40% { clip-path: inset(40% 0 50% 0); }
+    60% { clip-path: inset(80% 0 5% 0); }
+    80% { clip-path: inset(10% 0 70% 0); }
+    100% { clip-path: inset(30% 0 20% 0); }
+}
+
+.subtitle {
+    color: var(--lila-claro);
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    text-shadow: 0 0 5px rgba(224, 187, 228, 0.5);
+}
+
+/* =========================================
+   MENÚ PRINCIPAL (TARJETAS 3D)
 ========================================= */
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    gap: 25px;
+    perspective: 1000px;
 }
 
 .menu-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 15px;
-    padding: 25px 20px;
+    padding: 30px 20px;
     text-decoration: none;
     color: var(--texto-principal);
-    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s, border-color 0.4s;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
 .menu-card:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: var(--neon-morado);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(213, 0, 249, 0.2);
+    transform: translateY(-10px) scale(1.03);
+    border-color: var(--lila-neon);
+    box-shadow: 0 15px 30px rgba(213, 0, 249, 0.3), inset 0 0 15px rgba(213, 0, 249, 0.2);
 }
 
 .card-icon {
-    font-size: 3rem;
-    margin-bottom: 5px;
-    filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+    font-size: 3.5rem;
+    color: var(--lila-neon);
+    filter: drop-shadow(0 0 10px var(--lila-neon));
 }
 
-.menu-card h2 {
-    font-size: 1.2rem;
-    color: #fff;
-}
-
-.menu-card p {
-    font-size: 0.9rem;
-    color: #e1bee7;
-}
+.menu-card h2 { font-size: 1.3rem; font-weight: 800; letter-spacing: 1px; }
+.menu-card p { font-size: 0.95rem; color: #b39ddb; }
 
 /* =========================================
-   BOTONES Y CONTROLES
+   BOTONES E INPUTS
 ========================================= */
 .btn {
-    background: linear-gradient(45deg, #9c27b0, var(--neon-morado));
+    background: linear-gradient(90deg, var(--morado-brillante), var(--lila-neon));
     color: white;
     border: none;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    font-weight: 600;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: 800;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
-    display: inline-block;
-    box-shadow: 0 4px 15px rgba(213, 0, 249, 0.4);
+    text-transform: uppercase;
+    box-shadow: 0 0 15px var(--lila-neon);
+    position: relative;
+    overflow: hidden;
 }
 
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-20deg);
+    transition: 0.5s;
+}
+
+.btn:hover::after { left: 150%; }
 .btn:hover {
+    box-shadow: 0 0 30px var(--lila-neon), 0 0 10px #fff;
     transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(213, 0, 249, 0.6);
 }
 
 .btn-regresar {
@@ -167,33 +243,27 @@ body {
     box-shadow: none;
     margin-top: 20px;
 }
-
 .btn-regresar:hover {
-    background: var(--blanco-transparente);
+    background: rgba(224, 187, 228, 0.1);
     border-color: #fff;
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 15px var(--lila-claro);
 }
 
-/* Sliders (Input Range) */
 input[type="range"] {
     -webkit-appearance: none;
-    width: 100%;
-    max-width: 300px;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
-    outline: none;
-    margin: 15px 0;
+    width: 100%; max-width: 300px; height: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px; outline: none;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
 }
-
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 25px; height: 25px;
     border-radius: 50%;
-    background: var(--neon-morado);
+    background: #fff;
     cursor: pointer;
-    box-shadow: 0 0 10px var(--neon-morado);
+    box-shadow: 0 0 15px var(--lila-neon), 0 0 5px var(--lila-neon);
+    border: 3px solid var(--lila-neon);
 }
 
 /* =========================================
@@ -201,117 +271,70 @@ input[type="range"]::-webkit-slider-thumb {
 ========================================= */
 .ruleta-wrapper {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex; flex-direction: column; align-items: center;
     margin: 30px 0;
 }
-
 .flecha {
-    position: absolute;
-    top: -30px;
-    font-size: 2.5rem;
-    color: #ff1744;
+    position: absolute; top: -35px;
+    font-size: 3rem; color: #00e5ff;
     z-index: 10;
-    text-shadow: 0 2px 10px rgba(255, 23, 68, 0.6);
-    filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.5));
+    text-shadow: 0 0 15px #00e5ff, 0 0 30px #00e5ff;
+    animation: floating 2s infinite ease-in-out;
 }
-
 canvas {
-    background-color: transparent;
+    background-color: #fff; /* Fondo blanco para la rueda de colores pasteles */
     border-radius: 50%;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.1);
-    max-width: 100%;
-    height: auto;
+    box-shadow: 0 0 40px var(--lila-neon), 0 0 15px rgba(255, 255, 255, 0.5);
+    border: 5px solid var(--fondo-profundo);
+    max-width: 100%; height: auto;
 }
-
-.controles {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    width: 100%;
-}
-
 .resultado-texto {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 0 0 10px var(--neon-morado);
-    min-height: 30px;
-    margin-top: 10px;
+    font-size: 1.5rem; font-weight: 900; color: #fff;
+    text-shadow: 0 0 15px var(--lila-neon), 0 0 30px var(--lila-neon);
+    min-height: 40px; margin-top: 15px;
 }
 
 /* =========================================
-   MEMORAMA
+   MEMORAMA (CARTAS NEÓN 3D)
 ========================================= */
 .memorama-tablero {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    margin-top: 20px;
-    width: 100%;
+    gap: 15px; width: 100%;
 }
-
 .carta {
-    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-    backdrop-filter: blur(5px);
-    border: 1px solid var(--borde-cristal);
-    height: 110px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+    border: 1px solid rgba(213, 0, 249, 0.3);
+    height: 120px;
     border-radius: 12px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.9em;
-    text-align: center;
-    padding: 15px;
-    color: transparent; /* Texto oculto inicialmente */
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    user-select: none;
+    cursor: pointer; font-weight: 700; font-size: 0.95em;
+    display: flex; justify-content: center; align-items: center; text-align: center;
+    padding: 10px; color: transparent;
+    transition: transform 0.6s, box-shadow 0.3s;
+    transform-style: preserve-3d;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
-
 .carta:hover {
-    transform: translateY(-3px);
-    border-color: var(--lila-claro);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    border-color: var(--lila-neon);
+    box-shadow: 0 0 15px rgba(213, 0, 249, 0.5);
 }
-
 .carta.volteada {
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--lila-oscuro);
-    transform: rotateY(180deg) scale(1.05); /* Efecto 3D simple */
-    border: 2px solid var(--neon-morado);
+    background: #fff; color: var(--fondo-profundo);
+    transform: rotateY(180deg);
+    border: 3px solid var(--lila-neon);
+    box-shadow: 0 0 20px var(--lila-neon);
 }
-
-.carta.volteada span {
-    transform: rotateY(180deg); /* Desvoltear texto interno */
-    display: block;
-}
-
+.carta.volteada span { transform: rotateY(180deg); display: block; }
 .carta.encontrada {
-    background: rgba(181, 232, 176, 0.9); /* Verde claro */
-    color: #1b5e20;
-    border: 2px solid #4caf50;
-    box-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
-    transform: rotateY(180deg) scale(1);
+    background: #1de9b6; color: #004d40;
+    border: 3px solid #00bfa5;
+    box-shadow: 0 0 20px #1de9b6;
+    transform: rotateY(180deg) scale(0.95);
     cursor: default;
 }
-
-.carta.encontrada span {
-    transform: rotateY(180deg);
-}
+.carta.encontrada span { transform: rotateY(180deg); }
 
 @media (max-width: 650px) {
-    .memorama-tablero {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .glass-panel {
-        padding: 25px 15px;
-    }
-    canvas {
-        width: 300px;
-        height: 300px;
-    }
+    .memorama-tablero { grid-template-columns: repeat(2, 1fr); }
+    canvas { width: 300px; height: 300px; }
 }
