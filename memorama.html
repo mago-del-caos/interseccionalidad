@@ -3,129 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memorama de la Interseccionalidad</title>
+    <title>Memorama | Rueda de la Interseccionalidad</title>
+    <!-- Tipografía moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <img src="genero.png" alt="Banner Rueda de la Interseccionalidad" class="banner">
-    </header>
-    
-    <main class="container">
-        <h2>Memorama</h2>
-        <p>Encuentra el par correcto: une cada elemento de la rueda con su ejemplo de desigualdad correspondiente.</p>
+    <div class="app-container">
+        <header class="header">
+            <img src="genero.png" alt="Banner Rueda de la Interseccionalidad" class="banner" onerror="this.src='https://via.placeholder.com/800x200/4a148c/ffffff?text=Banner+genero.png';">
+        </header>
         
-        <div class="memorama-tablero" id="tablero">
-            <!-- Las cartas se generarán dinámicamente con JavaScript -->
-        </div>
-
-        <div style="margin-top: 20px;">
-            <a href="index.html" class="btn btn-regresar">Regresar al Menú</a>
-        </div>
-    </main>
-
-    <script>
-        // Los 8 conceptos y sus ejemplos
-        const conceptosYEjemplos = [
-            { id: 1, texto: "Estatus Socio-económico" },
-            { id: 1, texto: "No poder costear el acceso a la universidad" },
-            { id: 2, texto: "País de Origen" },
-            { id: 2, texto: "Sufrir xenofobia al migrar en busca de trabajo" },
-            { id: 3, texto: "Creencias Religiosas" },
-            { id: 3, texto: "Ser excluido por usar prendas asociadas a tu fe" },
-            { id: 4, texto: "Identidad de Género" },
-            { id: 4, texto: "Que no se respete tu nombre en un trámite legal" },
-            { id: 5, texto: "Orientación Sexual" },
-            { id: 5, texto: "Discriminación por tener pareja del mismo sexo" },
-            { id: 6, texto: "Edad" },
-            { id: 6, texto: "Rechazo laboral por ser considerado 'muy mayor'" },
-            { id: 7, texto: "Grupo Étnico" },
-            { id: 7, texto: "Trato médico desigual por tu color de piel" },
-            { id: 8, texto: "Discapacidad" },
-            { id: 8, texto: "Falta de rampas de acceso en un edificio público" }
-        ];
-
-        let cartasVolteadas = [];
-        let tableroBloqueado = false;
-        let paresEncontrados = 0;
-
-        function barajarCartas(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
-        function crearTablero() {
-            const tablero = document.getElementById('tablero');
-            const mazoBarajado = barajarCartas([...conceptosYEjemplos]);
-
-            mazoBarajado.forEach((cartaInfo, index) => {
-                const carta = document.createElement('div');
-                carta.classList.add('carta');
-                carta.dataset.id = cartaInfo.id;
-                carta.textContent = cartaInfo.texto;
-                
-                carta.addEventListener('click', voltearCarta);
-                tablero.appendChild(carta);
-            });
-        }
-
-        function voltearCarta() {
-            if (tableroBloqueado) return;
-            if (this === cartasVolteadas[0]) return; // Evitar doble clic en la misma carta
-
-            this.classList.add('volteada');
-            cartasVolteadas.push(this);
-
-            if (cartasVolteadas.length === 2) {
-                verificarCoincidencia();
-            }
-        }
-
-        function verificarCoincidencia() {
-            tableroBloqueado = true;
-            const esMatch = cartasVolteadas[0].dataset.id === cartasVolteadas[1].dataset.id;
-
-            if (esMatch) {
-                deshabilitarCartas();
-            } else {
-                desvoltearCartas();
-            }
-        }
-
-        function deshabilitarCartas() {
-            cartasVolteadas[0].classList.add('encontrada');
-            cartasVolteadas[1].classList.add('encontrada');
-            cartasVolteadas[0].removeEventListener('click', voltearCarta);
-            cartasVolteadas[1].removeEventListener('click', voltearCarta);
+        <main class="main-content glass-panel">
+            <h1 class="title">Memorama</h1>
+            <p class="subtitle">Encuentra el par correcto: une cada elemento de la rueda con su ejemplo real de desigualdad.</p>
             
-            paresEncontrados++;
-            resetearTablero();
+            <div class="memorama-tablero" id="tablero">
+                <!-- Las cartas se generarán dinámicamente desde el JS -->
+            </div>
 
-            if (paresEncontrados === 8) {
-                setTimeout(() => {
-                    alert("¡Felicidades! Has relacionado correctamente todos los conceptos con sus ejemplos.");
-                }, 500);
-            }
-        }
+            <div style="margin-top: 30px; text-align: center;">
+                <a href="index.html" class="btn btn-regresar">Regresar al Menú</a>
+            </div>
+        </main>
+    </div>
 
-        function desvoltearCartas() {
-            setTimeout(() => {
-                cartasVolteadas[0].classList.remove('volteada');
-                cartasVolteadas[1].classList.remove('volteada');
-                resetearTablero();
-            }, 1200); // 1.2 segundos para memorizar
-        }
-
-        function resetearTablero() {
-            cartasVolteadas = [];
-            tableroBloqueado = false;
-        }
-
-        // Inicializar el juego al cargar la página
-        crearTablero();
-    </script>
+    <!-- Archivo JS unificado -->
+    <script src="main.js"></script>
 </body>
 </html>
