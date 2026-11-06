@@ -1,20 +1,20 @@
-# Rueda de la Interseccionalidad 🎡
+# Rueda de la Interseccionalidad 🌸
 
-Aplicación web interactiva y educativa diseñada para explorar y comprender cómo las distintas realidades y factores de desigualdad se cruzan en la vida de las personas (estatus socio-económico, género, origen, etc.).
+Aplicación web interactiva, responsiva y educativa diseñada con un estilo *Kawaii* para explorar y comprender cómo las distintas realidades y factores de desigualdad se cruzan en la vida de las personas.
 
-## Dinámicas Incluidas
-1. **Ruleta de Azar:** Gira con físicas dependientes de la fuerza de lanzamiento para debatir sobre un elemento aleatorio.
-2. **Selector Manual:** Control de inicio y detención manual para elegir un tema específico a analizar.
-3. **Memorama:** Juego de memoria interactivo para relacionar los conceptos de interseccionalidad con ejemplos de la vida real.
+## 📱 Diseño Responsivo
+El proyecto fue reconstruido utilizando CSS Grid fluido y Flexbox, garantizando una experiencia visual perfecta sin superposición de elementos tanto en dispositivos móviles (iOS / Android) como en monitores de escritorio.
 
-## Tecnologías Utilizadas
+## 🎡 Dinámicas Incluidas
+1. **Ruleta de Azar:** Gira con físicas dependientes de la fuerza de lanzamiento.
+2. **Selector Manual:** Control de inicio y detención manual para elegir temas específicos.
+3. **Memorama:** Juego de memoria interactivo con cuadrícula fluida para relacionar conceptos con ejemplos reales.
+
+## 🛠️ Tecnologías Utilizadas
 * HTML5
-* CSS3 (Diseño con Glassmorphism)
+* CSS3 (Diseño fluido, variables pastel, animaciones de burbujas)
 * JavaScript Vanilla (Lógica de físicas, Canvas y manipulación del DOM)
-* Canvas Confetti (Efectos de celebración)
+* Canvas Confetti y FontAwesome (Librerías externas)
 
-## Instalación y Uso
-Al ser un proyecto estático, no requiere instalación de dependencias. 
-1. Clona este repositorio.
-2. Abre `index.html` en cualquier navegador web moderno.
-3. (Opcional) Activa GitHub Pages en la configuración del repositorio para desplegar la herramienta en línea.
+## 🚀 Despliegue en GitHub Pages
+Este proyecto es estático. Para asegurar un despliegue exitoso sin bloqueos de servidor, el repositorio incluye un archivo `.nojekyll` en la raíz.
