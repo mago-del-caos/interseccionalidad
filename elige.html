@@ -3,64 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selector Manual de Interseccionalidad</title>
+    <title>Selector Manual | Rueda de la Interseccionalidad</title>
+    <!-- Tipografía moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <img src="genero.png" alt="Banner Rueda de la Interseccionalidad" class="banner">
-    </header>
-    
-    <main class="container">
-        <h2>Selector Manual</h2>
-        <p>Inicia el giro y detenlo manualmente en el elemento que quieras analizar.</p>
+    <div class="app-container">
+        <header class="header">
+            <img src="genero.png" alt="Banner Rueda de la Interseccionalidad" class="banner" onerror="this.src='https://via.placeholder.com/800x200/4a148c/ffffff?text=Banner+genero.png';">
+        </header>
         
-        <div class="ruleta-wrapper">
-            <div class="flecha">▼</div>
-            <canvas id="ruleta" width="400" height="400"></canvas>
-        </div>
+        <main class="main-content glass-panel">
+            <h1 class="title">Selector Manual</h1>
+            <p class="subtitle">Inicia la rueda y detenla tú mismo frente a la flecha para elegir el tema a debatir.</p>
+            
+            <div class="ruleta-wrapper">
+                <div class="flecha">▼</div>
+                <canvas id="ruleta" width="400" height="400"></canvas>
+            </div>
 
-        <div class="controles">
-            <button id="btn-control" class="btn">Iniciar Giro</button>
-            <p id="resultado" style="margin-top: 15px; font-weight: bold; color: #9c27b0; font-size: 1.2em; min-height: 25px;"></p>
-            <a href="index.html" class="btn btn-regresar">Regresar al Menú</a>
-        </div>
-    </main>
+            <div class="controles">
+                <button id="btn-control" class="btn">Iniciar Giro</button>
+                
+                <!-- Aquí aparecerá el resultado con el estilo neón -->
+                <p id="resultado" class="resultado-texto"></p>
+                
+                <a href="index.html" class="btn btn-regresar">Regresar al Menú</a>
+            </div>
+        </main>
+    </div>
 
-    <script>
-        const canvas = document.getElementById("ruleta");
-        const ctx = canvas.getContext("2d");
-        const btnControl = document.getElementById("btn-control");
-        const textoResultado = document.getElementById("resultado");
-
-        const opciones = [
-            "Estatus Socio-económico",
-            "País de Origen",
-            "Creencias Religiosas",
-            "Identidad de Género",
-            "Orientación Sexual",
-            "Edad",
-            "Grupo Étnico",
-            "Discapacidad"
-        ];
-
-        const colores = [
-            "#ffb3ba", "#e0bbe4", "#957dad", "#aee5f5", 
-            "#b5e8b0", "#fff2aa", "#ffd59e", "#ff9a9e"
-        ];
-
-        let anguloActual = 0;
-        let girando = false;
-        let idAnimacion;
-
-        function dibujarRuleta() {
-            const radio = canvas.width / 2;
-            const arco = (2 * Math.PI) / opciones.length;
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            for (let i = 0; i < opciones.length; i++) {
-                const anguloInicial = anguloActual + i * arco;
-                const anguloFinal = anguloInicial + arco;
-
-                ctx.beginPath();
+    <!-- Archivo JS unificado -->
+    <script src="main.js"></script>
+</body>
+</html>
