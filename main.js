@@ -20,36 +20,48 @@ document.addEventListener("DOMContentLoaded", () => {
         "#ff9a9e"  /* Rosa oscuro */
     ];
 
+    // Función blindada para dibujar la ruleta en cualquier resolución
     function dibujarRuleta(ctx, canvas, anguloActual) {
+        // FORZAMOS ALTA RESOLUCIÓN INTERNA (Evita colapso en móviles y mejora nitidez)
+        canvas.width = 800;
+        canvas.height = 800;
+
         const radio = canvas.width / 2;
+        const centroX = canvas.width / 2;
+        const centroY = canvas.height / 2;
         const arco = (2 * Math.PI) / opciones.length;
 
+        // Limpiar el canvas antes de cada frame
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         for (let i = 0; i < opciones.length; i++) {
             const anguloInicial = anguloActual + i * arco;
             const anguloFinal = anguloInicial + arco;
 
-            // Dibujar rebanada
+            // 1. DIBUJAR LA REBANADA (Pie Slice)
             ctx.beginPath();
+            ctx.moveTo(centroX, centroY); // Nos ubicamos en el centro exacto
+            ctx.arc(centroX, centroY, radio, anguloInicial, anguloFinal);
+            ctx.lineTo(centroX, centroY); // Cerramos el trazo hacia el centro
             ctx.fillStyle = colores[i];
-            ctx.moveTo(radio, radio);
-            ctx.arc(radio, radio, radio, anguloInicial, anguloFinal);
             ctx.fill();
             
-            // Borde blanco grueso estilo sticker
-            ctx.lineWidth = 4;
+            // 2. DIBUJAR EL BORDE BLANCO ESTILO STICKER
+            ctx.lineWidth = 6; 
             ctx.strokeStyle = "#ffffff";
             ctx.stroke();
+            ctx.closePath();
 
-            // Dibujar texto alineado a la tipografía Nunito
+            // 3. DIBUJAR EL TEXTO
             ctx.save();
-            ctx.translate(radio, radio);
+            ctx.translate(centroX, centroY);
             ctx.rotate(anguloInicial + arco / 2);
             ctx.textAlign = "right";
-            ctx.fillStyle = "#6b4c7a"; // Morado suave para leer bien
-            ctx.font = "800 14px 'Nunito', sans-serif";
-            ctx.fillText(opciones[i], radio - 20, 5);
+            ctx.textBaseline = "middle"; // Centrado vertical perfecto
+            ctx.fillStyle = "#6b4c7a"; // Morado oscuro suave
+            // Aumentamos el tamaño de fuente para compensar la resolución 800x800
+            ctx.font = "900 24px 'Nunito', sans-serif"; 
+            ctx.fillText(opciones[i], radio - 40, 0); // Ajustamos el margen al borde
             ctx.restore();
         }
     }
@@ -104,7 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
             
             const ganador = opciones[indice];
 
-            // Confeti con colores pastel
             if (typeof confetti !== "undefined") {
                 confetti({
                     particleCount: 150,
@@ -144,7 +155,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!girandoManual) {
                 girandoManual = true;
                 btnControl.innerHTML = '<i class="fa-solid fa-stop"></i> Detener';
-                // Cambia a un rosa pastel al detener
                 btnControl.style.background = "#ff9a9e"; 
                 btnControl.style.boxShadow = "0 5px 15px rgba(255, 154, 158, 0.5)";
                 textoResultado.textContent = "";
@@ -153,7 +163,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 girandoManual = false;
                 cancelAnimationFrame(idAnimacion);
                 btnControl.innerHTML = '<i class="fa-solid fa-play"></i> Iniciar Giro';
-                // Vuelve al morado pastel al detenerse
                 btnControl.style.background = "var(--pastel-morado, #cda2e9)"; 
                 btnControl.style.boxShadow = "0 5px 15px rgba(205, 162, 233, 0.5)";
                 
