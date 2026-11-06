@@ -8,10 +8,16 @@ document.addEventListener("DOMContentLoaded", () => {
         "Grupo Étnico", "Discapacidad"
     ];
 
-    // Colores que combinan con la paleta lila/neón
+    // Paleta de colores pastel Kawaii
     const colores = [
-        "#ffb3ba", "#e0bbe4", "#957dad", "#aee5f5", 
-        "#b5e8b0", "#fff2aa", "#ffd59e", "#ff9a9e"
+        "#ffb3ba", /* Rosa */
+        "#e0bbe4", /* Lila */
+        "#cda2e9", /* Morado */
+        "#aee5f5", /* Azul */
+        "#b5e8b0", /* Verde */
+        "#fff2aa", /* Amarillo */
+        "#ffd59e", /* Naranja */
+        "#ff9a9e"  /* Rosa oscuro */
     ];
 
     function dibujarRuleta(ctx, canvas, anguloActual) {
@@ -31,18 +37,18 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx.arc(radio, radio, radio, anguloInicial, anguloFinal);
             ctx.fill();
             
-            // Borde oscuro para resaltar en el diseño neón
-            ctx.lineWidth = 3;
-            ctx.strokeStyle = "#0f0518";
+            // Borde blanco grueso estilo sticker
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = "#ffffff";
             ctx.stroke();
 
-            // Dibujar texto alineado a la tipografía Poppins
+            // Dibujar texto alineado a la tipografía Nunito
             ctx.save();
             ctx.translate(radio, radio);
             ctx.rotate(anguloInicial + arco / 2);
             ctx.textAlign = "right";
-            ctx.fillStyle = "#0f0518"; 
-            ctx.font = "800 14px 'Poppins', sans-serif";
+            ctx.fillStyle = "#6b4c7a"; // Morado suave para leer bien
+            ctx.font = "800 14px 'Nunito', sans-serif";
             ctx.fillText(opciones[i], radio - 20, 5);
             ctx.restore();
         }
@@ -65,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (girandoFuerza) return;
             girandoFuerza = true;
             
-            // Cambiar ícono a estado de carga
             btnGirar.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Girando...';
 
             const fuerza = parseInt(inputFuerza.value);
@@ -99,13 +104,13 @@ document.addEventListener("DOMContentLoaded", () => {
             
             const ganador = opciones[indice];
 
-            // Disparar confeti con colores de la paleta
+            // Confeti con colores pastel
             if (typeof confetti !== "undefined") {
                 confetti({
                     particleCount: 150,
                     spread: 70,
                     origin: { y: 0.6 },
-                    colors: ['#d500f9', '#9c27b0', '#00e5ff']
+                    colors: ['#ffb3ba', '#cda2e9', '#aee5f5']
                 });
             }
 
@@ -120,7 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     const btnControl = document.getElementById("btn-control");
     if (btnControl && !document.getElementById("btn-girar")) { 
-        // Se asegura de no correr en ruleta.html
         const canvasManual = document.getElementById("ruleta");
         const ctxManual = canvasManual.getContext("2d");
         const textoResultado = document.getElementById("resultado");
@@ -140,16 +144,18 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!girandoManual) {
                 girandoManual = true;
                 btnControl.innerHTML = '<i class="fa-solid fa-stop"></i> Detener';
-                btnControl.style.background = "linear-gradient(90deg, #d32f2f, #ff1744)"; 
-                btnControl.style.boxShadow = "0 0 20px #ff1744";
+                // Cambia a un rosa pastel al detener
+                btnControl.style.background = "#ff9a9e"; 
+                btnControl.style.boxShadow = "0 5px 15px rgba(255, 154, 158, 0.5)";
                 textoResultado.textContent = "";
                 animarGiroContinuo();
             } else {
                 girandoManual = false;
                 cancelAnimationFrame(idAnimacion);
                 btnControl.innerHTML = '<i class="fa-solid fa-play"></i> Iniciar Giro';
-                btnControl.style.background = "linear-gradient(90deg, var(--morado-brillante), var(--lila-neon))"; 
-                btnControl.style.boxShadow = "0 0 15px var(--lila-neon)";
+                // Vuelve al morado pastel al detenerse
+                btnControl.style.background = "var(--pastel-morado, #cda2e9)"; 
+                btnControl.style.boxShadow = "0 5px 15px rgba(205, 162, 233, 0.5)";
                 
                 const arcoPlano = (2 * Math.PI) / opciones.length;
                 const anguloNormalizado = anguloManual % (2 * Math.PI);
@@ -203,7 +209,6 @@ document.addEventListener("DOMContentLoaded", () => {
             carta.classList.add('carta');
             carta.dataset.id = cartaInfo.id;
             
-            // Span para prevenir efecto espejo en CSS 3D
             const spanTexto = document.createElement('span');
             spanTexto.textContent = cartaInfo.texto;
             carta.appendChild(spanTexto);
