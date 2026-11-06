@@ -2,7 +2,7 @@
    VARIABLES Y RESET
 ========================================= */
 :root {
-    --fondo-profundo: #0f0518; /* Morado casi negro para que resalte el neón */
+    --fondo-profundo: #0f0518; 
     --lila-neon: #d500f9;
     --morado-brillante: #9c27b0;
     --lila-claro: #e0bbe4;
@@ -282,7 +282,7 @@ input[type="range"]::-webkit-slider-thumb {
     animation: floating 2s infinite ease-in-out;
 }
 canvas {
-    background-color: #fff; /* Fondo blanco para la rueda de colores pasteles */
+    background-color: #fff;
     border-radius: 50%;
     box-shadow: 0 0 40px var(--lila-neon), 0 0 15px rgba(255, 255, 255, 0.5);
     border: 5px solid var(--fondo-profundo);
