@@ -3,39 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruleta con Fuerza | Rueda de la Interseccionalidad</title>
-    <!-- Tipografía moderna -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Ruleta de Azar | Rueda de la Interseccionalidad 🌌</title>
+    
+    <!-- Tipografía ultra moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS con control de versiones -->
+    <link rel="stylesheet" href="style.css?v=3.0">
+    
     <!-- Librería para el efecto de confeti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
+    <!-- Efectos de fondo (Orbes de luz animados) -->
+    <div class="animated-background">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+    </div>
+
     <div class="app-container">
-        <header class="header">
-            <img src="genero.png" alt="Banner Rueda de la Interseccionalidad" class="banner" onerror="this.src='https://via.placeholder.com/800x200/4a148c/ffffff?text=Banner+genero.png';">
+        <header class="header floating">
+            <img src="genero.png?v=3.0" alt="Banner Interseccionalidad" class="banner neon-border" onerror="this.src='https://via.placeholder.com/800x200/4a148c/ffffff?text=Banner+genero.png';">
         </header>
         
-        <main class="main-content glass-panel">
-            <h1 class="title">Ruleta de Azar</h1>
-            <p class="subtitle">Ajusta la fuerza de tu lanzamiento y gira la rueda para descubrir un elemento.</p>
+        <main class="main-content glass-panel-neon">
+            <h1 class="title glitch-effect" data-text="Ruleta de Azar">Ruleta de Azar</h1>
+            <p class="subtitle typing-effect">Ajusta la fuerza de tu lanzamiento y gira la rueda para descubrir un elemento de desigualdad.</p>
             
             <div class="ruleta-wrapper">
-                <div class="flecha">▼</div>
+                <div class="flecha"><i class="fa-solid fa-caret-down"></i></div>
                 <canvas id="ruleta" width="400" height="400"></canvas>
             </div>
 
             <div class="controles">
-                <label for="fuerza" style="font-weight: 600; font-size: 1.1rem;">Nivel de fuerza:</label>
+                <label for="fuerza" style="font-weight: 800; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 10px #d500f9;">Nivel de fuerza:</label>
                 <input type="range" id="fuerza" min="1" max="10" value="5">
                 
-                <button id="btn-girar" class="btn">¡Girar Ruleta!</button>
-                <a href="index.html" class="btn btn-regresar">Regresar al Menú</a>
+                <button id="btn-girar" class="btn"><i class="fa-solid fa-bolt"></i> ¡Girar Ruleta!</button>
+                <a href="index.html?v=3.0" class="btn btn-regresar"><i class="fa-solid fa-arrow-left"></i> Regresar al Menú</a>
             </div>
         </main>
     </div>
 
-    <!-- Archivo JS unificado -->
-    <script src="main.js"></script>
+    <!-- Archivo JS unificado con control de versiones -->
+    <script src="main.js?v=3.0"></script>
 </body>
 </html>
