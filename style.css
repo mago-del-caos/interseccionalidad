@@ -1,106 +1,317 @@
-/* Reset básico para asegurar consistencia en todos los navegadores */
+/* =========================================
+   VARIABLES Y RESET
+========================================= */
+:root {
+    --lila-oscuro: #2a0845;
+    --lila-medio: #6441A5;
+    --lila-claro: #e0bbe4;
+    --neon-morado: #d500f9;
+    --blanco-transparente: rgba(255, 255, 255, 0.1);
+    --borde-cristal: rgba(255, 255, 255, 0.2);
+    --texto-principal: #f3e5f5;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* Fondo lila general y tipografía */
 body {
-    background-color: #E6E6FA; /* Lila suave / Lavender */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
+    background: linear-gradient(135deg, var(--lila-oscuro) 0%, var(--lila-medio) 100%);
+    color: var(--texto-principal);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-attachment: fixed;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 900px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+    gap: 30px;
 }
 
-/* Estilo del banner solicitado (genero.png) */
+/* =========================================
+   HEADER Y BANNER
+========================================= */
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .banner {
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
     height: auto;
-    margin-bottom: 20px;
-    display: block;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--borde-cristal);
+    transition: transform 0.3s ease;
 }
 
-/* Contenedor principal de las páginas */
-.container {
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-    text-align: center;
-    max-width: 800px;
+.banner:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(213, 0, 249, 0.3);
+}
+
+/* =========================================
+   PANELES TIPO CRISTAL (GLASSMORPHISM)
+========================================= */
+.glass-panel {
+    background: var(--blanco-transparente);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--borde-cristal);
+    border-radius: 20px;
+    padding: 40px;
     width: 100%;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #fff, var(--lila-claro));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 4px 15px rgba(213, 0, 249, 0.4);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #ce93d8;
     margin-bottom: 30px;
 }
 
-/* Títulos y textos */
-h1, h2, h3 {
-    color: #4a148c; /* Morado oscuro para contrastar con el fondo lila */
-    margin-bottom: 15px;
+/* =========================================
+   MENÚ PRINCIPAL (TARJETAS)
+========================================= */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
 }
 
-p {
-    margin-bottom: 20px;
-    font-size: 1.1em;
-    line-height: 1.5;
-}
-
-/* Menú principal y botones */
-.menu {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.btn {
-    display: inline-block;
-    background-color: #9c27b0; /* Botones morados */
-    color: white;
+.menu-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px 20px;
     text-decoration: none;
-    padding: 15px 20px;
-    border-radius: 8px;
-    font-size: 1.1em;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.2s;
-    border: none;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #7b1fa2;
-    transform: scale(1.02);
-}
-
-.btn-regresar {
-    background-color: #607d8b;
-    margin-top: 20px;
-}
-
-/* --- ESTILOS PARA LA RULETA --- */
-.ruleta-wrapper {
-    position: relative;
-    margin: 20px auto;
+    color: var(--texto-principal);
+    transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 10px;
 }
 
-/* La flecha indicadora de la ruleta */
+.menu-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--neon-morado);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(213, 0, 249, 0.2);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 5px;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+}
+
+.menu-card h2 {
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.menu-card p {
+    font-size: 0.9rem;
+    color: #e1bee7;
+}
+
+/* =========================================
+   BOTONES Y CONTROLES
+========================================= */
+.btn {
+    background: linear-gradient(45deg, #9c27b0, var(--neon-morado));
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(213, 0, 249, 0.4);
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(213, 0, 249, 0.6);
+}
+
+.btn-regresar {
+    background: transparent;
+    border: 2px solid var(--lila-claro);
+    box-shadow: none;
+    margin-top: 20px;
+}
+
+.btn-regresar:hover {
+    background: var(--blanco-transparente);
+    border-color: #fff;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Sliders (Input Range) */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    max-width: 300px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    outline: none;
+    margin: 15px 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--neon-morado);
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--neon-morado);
+}
+
+/* =========================================
+   RULETA
+========================================= */
+.ruleta-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+}
+
 .flecha {
-    font-size: 3em;
-    margin-bottom: -15px;
+    position: absolute;
+    top: -30px;
+    font-size: 2.5rem;
+    color: #ff1744;
     z-index: 10;
-    color: #d32f2f;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 10px rgba(255, 23, 68, 0.6);
+    filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.5));
 }
 
 canvas {
+    background-color: transparent;
     border-radius: 50%;
-    box-shadow: 0
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.1);
+    max-width: 100%;
+    height: auto;
+}
+
+.controles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.resultado-texto {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 10px var(--neon-morado);
+    min-height: 30px;
+    margin-top: 10px;
+}
+
+/* =========================================
+   MEMORAMA
+========================================= */
+.memorama-tablero {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.carta {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--borde-cristal);
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9em;
+    text-align: center;
+    padding: 15px;
+    color: transparent; /* Texto oculto inicialmente */
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    user-select: none;
+}
+
+.carta:hover {
+    transform: translateY(-3px);
+    border-color: var(--lila-claro);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.carta.volteada {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--lila-oscuro);
+    transform: rotateY(180deg) scale(1.05); /* Efecto 3D simple */
+    border: 2px solid var(--neon-morado);
+}
+
+.carta.volteada span {
+    transform: rotateY(180deg); /* Desvoltear texto interno */
+    display: block;
+}
+
+.carta.encontrada {
+    background: rgba(181, 232, 176, 0.9); /* Verde claro */
+    color: #1b5e20;
+    border: 2px solid #4caf50;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
+    transform: rotateY(180deg) scale(1);
+    cursor: default;
+}
+
+.carta.encontrada span {
+    transform: rotateY(180deg);
+}
+
+@media (max-width: 650px) {
+    .memorama-tablero {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .glass-panel {
+        padding: 25px 15px;
+    }
+    canvas {
+        width: 300px;
+        height: 300px;
+    }
+}
